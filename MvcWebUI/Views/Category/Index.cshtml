@@ -1,0 +1,20 @@
+﻿@model CategoryListViewModel
+
+@{
+    ViewBag.title = "Title";
+    Layout = "_Layout";
+}
+
+<table class = "table table-responsive">
+
+    @foreach(var category in Model.Categories)
+    {
+        <tr>
+            <td>@category.CategoryId</td>
+            <td>@category.CategoryName</td>
+
+
+        </tr>
+    }
+
+</table>
