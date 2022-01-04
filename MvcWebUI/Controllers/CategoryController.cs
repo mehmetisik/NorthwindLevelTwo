@@ -14,15 +14,6 @@ namespace MvcWebUI.Controllers
         }
 
 
-        public IActionResult Index()
-        {
-
-            var model = new CategoryListViewModel
-            {
-                Categories = _categoryService.GetAll()
-            };
-
-            return View(model);
-        }
+     
     }
 }
