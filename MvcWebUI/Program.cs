@@ -2,6 +2,7 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using MvcWebUI.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,17 +14,18 @@ builder.Services.AddSingleton<IProductDal, EfProductDal>();
 builder.Services.AddSingleton<ICategoryService, CategoryManager>();
 builder.Services.AddSingleton<ICategoryDal, EfCategoryDal>();
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<ICartService, CartManager>();
+builder.Services.AddScoped<ICartSessionHelper, CartSessionHelper>();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+builder.Services.AddSession();
+
+
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-
-//public void ConfigureServices(IServiceCollection services)
-//{
-//    services.AddSingleton<IProductService, ProductManager>();
-//    services.AddControllersWithViews();
-//}
 
 
 // Configure the HTTP request pipeline.
@@ -38,6 +40,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseSession();
 
 app.UseAuthorization();
 

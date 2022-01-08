@@ -21,9 +21,7 @@
             <td>@product.UnitPrice</td>
             <td>@product.UnitsInStock</td>
             <td>@product.QuantityPerUnit</td>
-
-
-
+            <td> <a class="btn btn-small btn-success" asp-controller="Cart" asp-action="AddToCart" asp-route-productId="@product.ProductId">Sepete Ekle </a> </td>
 
         </tr>
     }
