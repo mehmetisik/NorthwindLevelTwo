@@ -2,7 +2,9 @@ using Business.Abstract;
 using Business.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using FluentValidation.AspNetCore;
 using MvcWebUI.Helpers;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +24,10 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession();
 
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddFluentValidation(option =>
+    option.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
+
 
 var app = builder.Build();
 
